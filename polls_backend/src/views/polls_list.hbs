@@ -1,0 +1,28 @@
+<div>
+  <div class="mt-5">
+    {{#each polls}}
+      <div class="relative mb-5 rounded-[40px] p-5 border-2">
+        <div class="flex flex-col space-y-1.5 p-6 text-2xl font-semibold text-center">
+          <div>{{title}}</div>
+          <p class="text-sm text-muted-foreground">{{comment}}</p>
+        </div>
+        <div class="p-6 pt-0">
+          {{#each this.answers}}
+            <button title="{{votes}}"
+                    class="relative overflow-hidden w-full flex justify-between items-center rounded-full border border-gray-200 py-2 px-6 mb-5 transition"
+                    style="cursor: default;">
+              <div class="relative z-20">{{answer}}</div>
+              <div class="absolute left-0 top-0 z-10 bottom-0 bg-gray-200" style="width: calc({{percentage}}%);"></div>
+              <div class="relative z-20 text-gray-400">{{percentage}}%</div>
+            </button>
+          {{/each}}
+          <div class="flex items-center p-6 pt-0 justify-end text-gray-400">всего голосов: {{conclusion}}</div>
+        </div>
+        <form class="absolute" style="top: 20px; right: 30px" onsubmit="fetch('http://localhost:3000/api/polls/' + {{id}}, {method: 'delete'})">
+          <button class="text-red-500" type="submit">Удалить опрос</button>
+        </form>
+        <div class="absolute text-yellow-500" style="top: 20px; left: 30px" title="Голосовать нельзя">Опрос в режиме просмотра</div>
+      </div>
+    {{/each}}
+  </div>
+</div>
