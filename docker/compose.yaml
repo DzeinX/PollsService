@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 11111
+      POSTGRES_DB: test
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  backend:
+    build: ../polls_backend
+    container_name: polls_backend
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres_db
+      APP_ABORT_ON_ERROR: true
+      DB_PORT: 5432
+      DB_USERNAME: user
+      DB_PASSWORD: 11111
+      DB_DATABASE_NAME: test
+    networks:
+      - app-network
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: ../polls_frontend
+    container_name: polls_frontend
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+networks:
+  app-network:
+    driver: bridge

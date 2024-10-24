@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /*animation: show 0.3s ease-out;*/
+}
+
+.show {
+  animation: show 0.3s ease-out;
+}
+
+@keyframes show {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
