@@ -32,7 +32,7 @@ import * as process from 'node:process';
       database: process.env.DB_DATABASE_NAME,
       entities: [PollsEntity, AnswersEntity, UserEntity],
       synchronize: !!process.env.DB_SYNCHRONIZE,
-      logging: true,
+      logging: false,
       autoLoadEntities: !!process.env.DB_AUTO_LOAD_ENTITIES,
     }),
     CaslModule,
